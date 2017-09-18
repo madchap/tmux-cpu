@@ -4,17 +4,21 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$CURRENT_DIR/scripts/helpers.sh"
 
-cpu_interpolation=(
-	"\#{cpu_percentage}"
-	"\#{cpu_icon}"
-	"\#{cpu_bg_color}"
-	"\#{cpu_fg_color}"
+nmcli_interpolation=(
+	"\#{nmcli_signal}"
+	"\#{nmcli_ssid}"
+	"\#{nmcli_bars}"
+	"\#{nmcli_rate}"
+	"\#{nmcli_security}"
+	"\#{nmcli_channel}"
 )
-cpu_commands=(
-	"#($CURRENT_DIR/scripts/cpu_percentage.sh)"
-	"#($CURRENT_DIR/scripts/cpu_icon.sh)"
-	"#($CURRENT_DIR/scripts/cpu_bg_color.sh)"
-	"#($CURRENT_DIR/scripts/cpu_fg_color.sh)"
+nmcli_commands=(
+	"#($CURRENT_DIR/scripts/nmcli_signal.sh)"
+	"#($CURRENT_DIR/scripts/nmcli_ssid.sh)"
+	"#($CURRENT_DIR/scripts/nmcli_bars.sh)"
+	"#($CURRENT_DIR/scripts/nmcli_rate.sh)"
+	"#($CURRENT_DIR/scripts/nmcli_security.sh)"
+	"#($CURRENT_DIR/scripts/nmcli_channel.sh)"
 )
 
 set_tmux_option() {
@@ -25,8 +29,8 @@ set_tmux_option() {
 
 do_interpolation() {
 	local all_interpolated="$1"
-	for ((i=0; i<${#cpu_commands[@]}; i++)); do
-		all_interpolated=${all_interpolated/${cpu_interpolation[$i]}/${cpu_commands[$i]}}
+	for ((i=0; i<${#nmcli_commands[@]}; i++)); do
+		all_interpolated=${all_interpolated/${nmcli_interpolation[$i]}/${nmcli_commands[$i]}}
 	done
 	echo "$all_interpolated"
 }
