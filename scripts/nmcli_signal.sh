@@ -11,6 +11,6 @@ print_nmcli_signal() {
 }
 
 main() {
-        print_nmcli_percentage
+        print_nmcli_signal
 }
 main
